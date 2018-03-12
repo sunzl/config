@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+
+<!-- 	<dubbo:reference id="riskApplyService"
+		interface="com.namibank.df.risk.audit.apply.RiskApplyService" version="1.0.0"
+		retries="0" check="false" registry="client" />
+		 -->
+		 
+	<dubbo:reference id="assetTransBusService"
+		interface="com.namibank.df.fl.core.busService.AssetTransBusService" version="1.0.0"
+		retries="0" check="false"  timeout="120000"/>
+		 
+	<!-- 还款成功 推送清算平台 -->
+	<dubbo:reference id="repaymentTransBusService"
+		interface="com.namibank.df.fl.core.busService.RepaymentTransBusService" version="1.0.0"
+		retries="0" check="false" registry="client" />
+	
+	<!-- 资金源额度查询 -->
+	<dubbo:reference id="queryTransBusService"
+		interface="com.namibank.df.fl.core.busService.QueryTransBusService" version="1.0.0"
+		retries="0" check="false" registry="client" />	 
+
+	<!-- excel 导入 -->
+	<dubbo:reference id="enchashmentTransBusService"
+		interface="com.namibank.df.fl.core.busService.EnchashmentTransBusService" version="1.0.0"
+		retries="0" check="false" registry="client" />
+
+	<dubbo:reference id="iPayEngine"
+					 interface="com.namibank.df.gateway.service.IPayEngine" version="1.0.0"
+					 retries="0" check="false" registry="client" />
+</beans>
